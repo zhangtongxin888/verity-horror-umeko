@@ -23,6 +23,8 @@ Custom-domain DNS changes and Google Search Console work must wait for the launc
 
 After the custom domain is live, record the four required real-time checks in `docs/POST_LAUNCH_CHECK.md`. A successful build, git push, or workers.dev deployment alone does not satisfy the completion gate.
 
+The exact Vercel records, preserved Spaceship nameservers, and pre-change recovery values are recorded in `docs/DNS_HANDOFF.md`.
+
 ## Content accuracy
 
 Gameplay claims are limited to the official experience description, Roblox Games and Places APIs, and official badge metadata checked on August 18, 2026. Editorial recommendations are labeled. This site does not mix in the Specter Development version or Verity [REALISTIC].
