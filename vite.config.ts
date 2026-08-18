@@ -14,7 +14,9 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 const localBindingConfig = {
   name: "verity-horror-umeko",
   main: "./worker/index.ts",
-  compatibility_date: "2026-08-18",
+  // The starter's local runtime currently supports dates through 2026-05-22.
+  // The production build is advanced to the current date by the post-build script.
+  compatibility_date: "2026-05-22",
   compatibility_flags: ["nodejs_compat"],
   observability: { enabled: true },
   d1_databases: d1
