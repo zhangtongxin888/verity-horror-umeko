@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/StaticLink";
 import type { ReactNode } from "react";
 import { GAME, ROUTES } from "../_data/site";
 

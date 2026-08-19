@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/StaticLink";
 import { GAME } from "../_data/site";
 
 export function SiteHeader() {

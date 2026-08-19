@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/StaticLink";
 import { GAME, makeMetadata } from "./_data/site";
 
 export const metadata = makeMetadata(

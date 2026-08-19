@@ -1,3 +1,4 @@
+import { AdsterraPopunderGate, AdsterraSocialBarGate, AdsterraStickyRail, AdsterraGlobalFallback } from "@/components/ads";
 import type { Metadata, Viewport } from "next";
 import { SiteFooter, SiteHeader } from "./_components/SiteShell";
 import { GAME, SITE_URL } from "./_data/site";
@@ -41,6 +42,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <AdsterraPopunderGate />
+        <AdsterraSocialBarGate />
+        <AdsterraStickyRail />
+        <AdsterraGlobalFallback />
         <a className="skip-link" href="#main-content">Skip to guide</a>
         <SiteHeader />
         <div id="main-content" tabIndex={-1}>{children}</div>

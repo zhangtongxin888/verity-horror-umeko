@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/StaticLink";
 import { FactNote, GuidePage } from "../_components/GuidePage";
 import { GAME, makeMetadata } from "../_data/site";
 

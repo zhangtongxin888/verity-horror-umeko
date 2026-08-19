@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/StaticLink";
 import { AdviceNote, CautionNote, FactNote, GuidePage, StepList } from "../_components/GuidePage";
 import { makeMetadata } from "../_data/site";
 
