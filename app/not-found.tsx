@@ -2,7 +2,7 @@ import Link from "@/components/StaticLink";
 
 export default function NotFound() {
   return (
-    <main className="final-cta not-found">
+    <main data-adsterra-clean="" className="final-cta not-found">
       <p className="section-kicker warning-kicker">404 · ROUTE LOST</p>
       <h1>This briefing is missing.</h1>
       <p>Return to the verified beginner path and choose the next useful step from there.</p>

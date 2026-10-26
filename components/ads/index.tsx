@@ -494,31 +494,37 @@ export function AdSlot({ label }: { label: string }) {
 export function AdsterraPopunderGate() {
   const cleanAdRoute = useCleanAdRoute();
 
+  /* 2026-10-23: the Popunder is loaded by the shared /adsterra/runtime.js
+     (3 per visitor per local day, counted on the first click after the
+     Popunder script loads). This gate only hands it a Popunder-only config.
+     Legal routes and 404 pages (data-adsterra-clean or Next's default 404)
+     never load it. */
   useEffect(() => {
     if (cleanAdRoute) return;
     if (!runtimeConfig.adsterraEnablePopunder || !runtimeConfig.adsterraPopunderScriptUrl) return;
+    if (document.querySelector("[data-adsterra-clean], .next-error-h1")) return;
+    if (document.getElementById("adsterra-config") || document.getElementById("adsterra-runtime")) return;
 
-    const pageViewsKey = "roblox-site-adsterra-pageviews";
-    const loadedKey = "roblox-site-adsterra-popunder-loaded";
-    const nextPageViews = Number(window.sessionStorage.getItem(pageViewsKey) || "0") + 1;
-    window.sessionStorage.setItem(pageViewsKey, String(nextPageViews));
+    const config = document.createElement("script");
+    config.type = "application/json";
+    config.id = "adsterra-config";
+    config.textContent = JSON.stringify({
+      adNetwork: "adsterra",
+      status: "ready",
+      cleanPage: false,
+      slots: [],
+      enablePopunder: true,
+      enableSocialBar: false,
+      popunderScriptUrl: runtimeConfig.adsterraPopunderScriptUrl,
+      socialBarScriptUrl: ""
+    });
+    document.body.appendChild(config);
 
-    if (window.sessionStorage.getItem(loadedKey)) return;
-    if (nextPageViews < runtimeConfig.adsterraPopunderMinPageViews) return;
-
-    const timer = window.setTimeout(() => {
-      if (document.getElementById("adsterra-popunder")) return;
-      const script = document.createElement("script");
-      script.id = "adsterra-popunder";
-      script.src = normalizeScriptUrl(runtimeConfig.adsterraPopunderScriptUrl) || "";
-      script.async = true;
-      script.onload = () => trackAdEvent("ad_script_loaded", { ad_slot: "popunder_gate", ad_format: "popunder" });
-      script.onerror = () => trackAdEvent("ad_script_error", { ad_slot: "popunder_gate", ad_format: "popunder" });
-      document.body.appendChild(script);
-      window.sessionStorage.setItem(loadedKey, "true");
-    }, runtimeConfig.adsterraPopunderDelayMs);
-
-    return () => window.clearTimeout(timer);
+    const runtime = document.createElement("script");
+    runtime.id = "adsterra-runtime";
+    runtime.src = "/adsterra/runtime.js";
+    runtime.async = true;
+    document.body.appendChild(runtime);
   }, [cleanAdRoute]);
 
   return null;
