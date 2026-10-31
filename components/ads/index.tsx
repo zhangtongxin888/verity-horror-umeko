@@ -514,9 +514,10 @@ export function AdsterraPopunderGate() {
       cleanPage: false,
       slots: [],
       enablePopunder: true,
-      enableSocialBar: false,
+      /* 2026-10-31: Social Bar rides the same runtime (3/day, 4 s delay, never legal/404). */
+      enableSocialBar: Boolean(runtimeConfig.adsterraSocialBarScriptUrl),
       popunderScriptUrl: runtimeConfig.adsterraPopunderScriptUrl,
-      socialBarScriptUrl: ""
+      socialBarScriptUrl: runtimeConfig.adsterraSocialBarScriptUrl || ""
     });
     document.body.appendChild(config);
 
